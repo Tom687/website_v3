@@ -1,0 +1,197 @@
+//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
+{
+  "port": 1337,
+  "origin": ["http://tom-pomarede.com", "https://tom-pomarede.com"],
+  "apiUri": "http://localhost:1337",
+  "dbUri": "mongodb+srv://tom:dkPM144jaED@cluster0.augmw.mongodb.net/oauth-tutorial?retryWrites=true&w=majority",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "15m",
+  "refreshTokenTtl": "24h",
+  "domain": "tom-pomarede.com",
+  "cookieTokenSecure": true,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "http://localhost:1337/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "node-jwt-connection@api.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 25,
+  "emailUsernameProd": "website",
+  "emailPasswordProd": "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"
+}
+
+{
+  "port": 1337,
+  "origin": "http://localhost:3000",
+  "apiUrl": "http://localhost:1337",
+  "dbUrl": "mongodb+srv://tom:dkPM144jaED@cluster0.augmw.mongodb.net/oauth-tutorial?retryWrites=true&w=majority",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "2h",
+  "refreshTokenTtl": "24h",
+  "domain": "localhost",
+  "cookieTokenSecure": false,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "http://localhost:1337/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "node-jwt-connection@api.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 465,
+  "emailUsernameProd": "website",
+  "emailPasswordProd": "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"
+}
+
+{
+  "port": 1337,
+  "origin": "http://localhost:3000",
+  "apiUrl": "http://localhost:1337",
+  "dbUrl": "mongodb+srv://tom:dkPM144jaED@cluster0.augmw.mongodb.net/oauth-tutorial?retryWrites=true&w=majority",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "2h",
+  "refreshTokenTtl": "24h",
+  "domain": "localhost",
+  "cookieTokenSecure": false,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "http://localhost:1337/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "node-jwt-connection@api.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 465,
+  "emailUsernameProd": "website",
+  "emailPasswordProd": "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"
+}
+
+{
+  "port": 1337,
+  "origin": ["http://tom-pomarede.com", "https://tom-pomarede.com"],
+  "apiUri": "http://localhost:1337",
+  "dbUri": "mongodb+srv://tom:dkPM144jaED@cluster0.augmw.mongodb.net/oauth-tutorial?retryWrites=true&w=majority",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "15m",
+  "refreshTokenTtl": "24h",
+  "domain": "tom-pomarede.com",
+  "cookieTokenSecure": true,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "http://localhost:1337/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "node-jwt-connection@api.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 465,
+  "emailUsernameProd": "apikey",
+  "emailPasswordProd": "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"
+}
+
+
+{
+  "port": 1337,
+  "origin": ["http://tom-pomarede.com", "https://tom-pomarede.com"],
+  "apiUri": "http://localhost:1337",
+  "dbUri": "mongodb+srv://tom:dkPM144jaED@cluster0.augmw.mongodb.net/oauth-tutorial?retryWrites=true&w=majority",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "15m",
+  "refreshTokenTtl": "24h",
+  "domain": "tom-pomarede.com",
+  "cookieTokenSecure": true,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "http://localhost:1337/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "node-jwt-connection@api.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 25,
+  "emailUsernameProd": "website",
+  "emailPasswordProd": "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"
+}
+
+
+// GOOD HERE ?
+{
+  "port": 1337,
+  "origin": "https://tom-pomarede.com",
+  "saltWorkFactor": 10,
+  "logLevel": "info",
+  "accessTokenTtl": "15m",
+  "refreshTokenTtl": "24h",
+  "refreshTokenRememberMeTtl": "30d",
+  "domain": "tom-pomarede.com",
+  "cookieTokenSecure": true,
+  "googleOAuthTokensUrl": "https://oauth2.googleapis.com/token",
+  " publicKey": "2",
+  "privateKey": "1",
+  "googleClientId": "784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com",
+  "googleClientSecret": "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",
+  "googleOAuthRedirectUrl": "https://tom-pomarede.com/api/sessions/oauth/google",
+  "emailHost": "smtp.mailtrap.io",
+  "emailUsername": "e4a7aab0ceb0af",
+  "emailPassword": "ab21955e3250c3",
+  "emailPort": 2525,
+  "emailFrom": "admin@tom-pomarede.com",
+  "clientPort": 3000,
+  "emailHostProd": "smtp.sendgrid.net",
+  "emailPortProd": 465,
+  "emailUsernameProd": "website3",
+  "emailPasswordProd": "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"
+}
+"publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBb/F3nCr34Efqh3YsouWcq\njObDS>
+"privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQBb/F3nCr34Efqh3YsouWcqjObDSm21ZRCMIB53Z39QY6ZU3nmT\>
+{
+  "name": "website2",
+  "ports": [25, 587, 465],
+  "pass": "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"
+}
+
+{
+  "sendgrid": {
+    "website3": "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"
+  },
+  // TODO : Mettre logo (écran consentement)
+  "googleoauth": {
+    "projectName": "portfolio-v1-pern",
+    "nomDeLApplication": "Portfolio v1 PERN",
+    "googleClientId": "187433845150-35o8o60k3s333vv39e31n0m4dv0jsiva.apps.googleusercontent.com",
+    "googleClientSecret": "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",
+    "googleOAuthRedirectUrl": "https://tom-pomarede.com/api/sessions/oauth/google"
+  }
+}

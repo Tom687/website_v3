@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Backend API
+  auth-api:
+    #container_name: auth-api
+    build: ./
+    command: npm start
+    working_dir: /usr/src/pern-api
+    environment:
+      POSTGRES_URI: postgres://user:secret@postgres:5432/pern-api-db
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./:/usr/src/pern-api
+      - /usr/src/pern-api/node_modules
+
+  # Postgres service
+  postgres:
+    container_name: postgres
+    build: ./postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: pern-api-db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_HOST: postgres

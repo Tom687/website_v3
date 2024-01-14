@@ -1,0 +1,17 @@
+extends baseEmail
+
+block content
+	p Bonjour #{name},
+	p Bienvenu sur mon portfolio PERN stack !
+
+	table.btn.btn-primary(role="presentation" border="0" cellpadding="0" cellspacing="0")
+		tbody
+			tr
+				td(align="left")
+					table(role="presentation" border="0" cellpadding="0" cellspacing="0")
+						tbody
+							tr
+								td
+									a(href=`${url}` target="_blank") Call To Action (UPLOAD USER PHOTO)
+	p Si vous avez besoin d'aide avec notre API, contactez nous !
+	p Tom Pomarede - CEO
