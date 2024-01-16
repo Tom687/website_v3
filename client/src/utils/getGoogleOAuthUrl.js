@@ -8,7 +8,7 @@ export default function getGoogleOAuthUrl() {
 	
 	const options = {
 		redirect_uri: baseURL,
-		client_id: '784958889624-e4tlkl7mqb6cd3gbm60jj6578kk5bc9d.apps.googleusercontent.com',
+		client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID || 'xxx-xxx-xx',
 		access_type: 'offline',
 		response_type: 'code',
 		prompt: 'consent',
