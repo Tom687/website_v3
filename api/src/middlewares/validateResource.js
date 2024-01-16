@@ -6,16 +6,15 @@ const validate = (schema) => (req, res, next) => {
       body: req.body,
       query: req.query,
       params: req.params,
-    });
-    
-    next();
+    })
+
+    next()
   }
   catch (err) {
     // TODO : Voir gestion de l'erreur
     // => Utiliser json({ status: 'error', error: message })
-    return res.status(400)
-      .send(err.errors);
+    return res.status(400).send(err.errors)
   }
-};
+}
 
-export default validate;
+export default validate

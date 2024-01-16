@@ -1,20 +1,20 @@
-import jwt from 'jsonwebtoken';
-import config from 'config';
+import jwt from 'jsonwebtoken'
+import config from 'config'
 
-const publicKey = config.get('publicKey');
-const privateKey = config.get('privateKey');
+const publicKey = config.get('publicKey')
+const privateKey = config.get('privateKey')
 
 export function signJwt(object, options) {
   return jwt.sign(object, privateKey, {
-    ...(options && options),
+    ...( options && options ),
     algorithm: 'RS256',
-  });
+  })
 }
 
 export function verifyJwt(token) {
   try {
-    const decoded = jwt.verify(token, publicKey);
-    
+    const decoded = jwt.verify(token, publicKey)
+
     return {
       valid: true,
       expired: false,
@@ -22,12 +22,12 @@ export function verifyJwt(token) {
     }
   }
   catch (err) {
-    console.warn('verifyJwt error');
-    
+    console.warn('verifyJwt error')
+
     return {
       valid: false,
       expired: err.message === 'jwt expired',
-      decoded: null
-    };
+      decoded: null,
+    }
   }
 }
