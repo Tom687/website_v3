@@ -1,166 +1,165 @@
 @media (max-width: 600px) {
-	/*.fc-prev-button, .fc-next-button {
-		padding: 0!important;
-	}*/
+    /*.fc-prev-button, .fc-next-button {
+        padding: 0!important;
+    }*/
+    /* Header block */
+    .fc .fc-toolbar.fc-header-toolbar {
+        /* TODO : Checker lequel est le mieux pour mobile */
+        justify-content: space-evenly;
+        /*justify-content: space-around;*/
+        /*justify-content: space-between;*/
+    }
 
-	/* Header block */
-	.fc .fc-toolbar.fc-header-toolbar {
-		/* TODO : Checker lequel est le mieux pour mobile */
-		justify-content: space-evenly;
-		/*justify-content: space-around;*/
-		/*justify-content: space-between;*/
-	}
+    /* Header buttons (left side : prev, next, today, right side : month, week, day, list */
+    div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button {
+        padding: 0.1rem 0.25rem;
+    }
 
-	/* Header buttons (left side : prev, next, today, right side : month, week, day, list */
-	div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr button {
-		padding: 0.1rem 0.25rem;
-	}
+    /* Header Prev button */
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+        border-bottom-left-radius: 0;
+    }
 
-	/* Header Prev button */
-	.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child) {
-		border-bottom-left-radius: 0;
-	}
+    /* Header Next button */
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+        border-bottom-right-radius: 0;
+    }
 
-	/* Header Next button */
-	.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
-		border-bottom-right-radius: 0;
-	}
+    /* Header date */
+    div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr h2 {
+        font-size: 1.15em;
+        white-space: nowrap;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
 
-	/* Header date */
-	div.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr h2 {
-		font-size: 1.15em;
-		white-space: nowrap;
-		margin-left: 0.5rem;
-		margin-right: 0.5rem;
-	}
+    /* Header left side button group */
+    .fc-toolbar-chunk {
+        display: flex;
+        flex-direction: column;
+    }
 
-	/* Header left side button group */
-	.fc-toolbar-chunk {
-		display: flex;
-		flex-direction: column;
-	}
+    /* Header Today button margin (to fix position) */
+    .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+        /*margin: 0;
+        margin-top: 0.75rem;
+        flex-direction: column;*/
+        margin: 0;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
 
-	/* Header Today button margin (to fix position) */
-	.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
-		/*margin: 0;
-		margin-top: 0.75rem;
-		flex-direction: column;*/
-		margin: 0;
-		border-top-right-radius: 0;
-		border-top-left-radius: 0;
-	}
+    /* Header right side buttons */
+    .fc-direction-ltr .fc-toolbar > :last-child {
+        /*margin-left: 0.5rem;*/
+        flex-direction: column !important;
+    }
 
-	/* Header right side buttons */
-	.fc-direction-ltr .fc-toolbar > :last-child {
-		/*margin-left: 0.5rem;*/
-		flex-direction: column!important;
- 	}
+    /* Day titles (month, week and day views, not list view) */
+    .fc-view-harness.fc-view-harness-active > div > table > thead > tr > th > div > div > table > thead {
+        font-size: 0.8em;
+    }
 
-	/* Day titles (month, week and day views, not list view) */
-	.fc-view-harness.fc-view-harness-active > div > table > thead > tr > th > div > div > table > thead {
-		font-size: 0.8em;
-	}
+    /* Header right side button group */
+    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr > div:nth-child(3) > div {
+        flex-direction: column;
+    }
 
-	/* Header right side button group */
-	.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr > div:nth-child(3) > div {
-		flex-direction: column;
-	}
+    /* Header right side buttons */
+    .fc-direction-ltr .fc-toolbar > :last-child button {
+        border-radius: 0.25rem !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
 
-	/* Header right side buttons */
-	.fc-direction-ltr .fc-toolbar > :last-child button {
-		border-radius: 0.25rem!important;
-		border-top-left-radius: 0!important;
-		border-top-right-radius: 0!important;
-		border-bottom-left-radius: 0!important;
-		border-bottom-right-radius: 0!important;
-	}
+    /* Header right side first button */
+    .fc-direction-ltr .fc-toolbar > :last-child button:first-child {
+        /*border-radius: 0.25rem!important;*/
+        margin-left: -1px;
+        border-top-left-radius: 0.25rem !important;
+        border-top-right-radius: 0.25rem !important;
+    }
 
-	/* Header right side first button */
-	.fc-direction-ltr .fc-toolbar > :last-child button:first-child {
-		/*border-radius: 0.25rem!important;*/
-		margin-left: -1px;
-		border-top-left-radius: 0.25rem!important;
-		border-top-right-radius: 0.25rem!important;
-	}
+    /* Header right side last button */
+    .fc-direction-ltr .fc-toolbar > :last-child button:last-child {
+        border-bottom-left-radius: 0.25rem !important;
+        border-bottom-right-radius: 0.25rem !important;
+    }
 
-	/* Header right side last button */
-	.fc-direction-ltr .fc-toolbar > :last-child button:last-child {
-		border-bottom-left-radius: 0.25rem!important;
-		border-bottom-right-radius: 0.25rem!important;
-	}
+    /* Allday text (week and day views only) */
+    .fc .fc-timegrid-axis-cushion {
+        font-size: 0.8em;
+    }
 
-	/* Allday text (week and day views only) */
-	.fc .fc-timegrid-axis-cushion {
-		font-size: 0.8em;
-	}
+    /* Hours (displayed on the first column of cells in week and day views */
+    .fc .fc-timegrid-slot-label {
+        font-size: 0.75em;
+    }
 
-	/* Hours (displayed on the first column of cells in week and day views */
-	.fc .fc-timegrid-slot-label {
-		font-size: 0.75em;
-	}
+    /* Day view table title */
+    .fc .fc-col-header-cell-cushion {
+        /*font-size: 1.35em;*/
+    }
 
-	/* Day view table title */
-	.fc .fc-col-header-cell-cushion {
-		/*font-size: 1.35em;*/
-	}
+    /* List view table titles */
+    .fc-theme-standard .fc-list-day-cushion {
+        font-size: .8em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
-	/* List view table titles */
-	.fc-theme-standard .fc-list-day-cushion {
-		font-size: .8em;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
+    /* List view table */
+    .fc .fc-list-day-cushion, .fc .fc-list-table td {
+        padding: 10px 8px;
+        font-size: 0.8em;
+    }
 
-	/* List view table */
-	.fc .fc-list-day-cushion, .fc .fc-list-table td {
-		padding: 10px 8px;
-		font-size: 0.8em;
-	}
+    /* List view item cells */
+    .fc-direction-ltr .fc-list-day-text, .fc-direction-rtl .fc-list-day-side-text {
+        width: 0;
+    }
 
-	/* List view item cells */
-	.fc-direction-ltr .fc-list-day-text, .fc-direction-rtl .fc-list-day-side-text {
-		width: 0;
-	}
+    /* Day view "day number" block */
+    .fc .fc-daygrid-day-number {
+        font-size: 0.8em;
+    }
 
-	/* Day view "day number" block */
-	.fc .fc-daygrid-day-number {
-		font-size: 0.8em;
-	}
+    /* Day view "+ X more" block */
+    .fc .fc-daygrid-day-bottom {
+        font-size: 0.65em;
+        white-space: nowrap;
+        margin-top: -6px !important;
+    }
 
-	/* Day view "+ X more" block */
-	.fc .fc-daygrid-day-bottom {
-		font-size: 0.65em;
-		white-space: nowrap;
-		margin-top: -6px!important;
-	}
-
-	/* Week view event block title */
-	.fc-v-event .fc-event-title {
-		font-size: 0.85em;
-	}
+    /* Week view event block title */
+    .fc-v-event .fc-event-title {
+        font-size: 0.85em;
+    }
 }
 
 @media (max-width: 400px) {
-	/* Day view "+ X more" block */
-	.fc .fc-daygrid-day-bottom {
-		margin-top: -12px!important;
-	}
+    /* Day view "+ X more" block */
+    .fc .fc-daygrid-day-bottom {
+        margin-top: -12px !important;
+    }
 }
 
 /* Header title (date) */
 .fc .fc-toolbar-title {
-	font-size: 1.65em;
+    font-size: 1.65em;
 }
 
 /* Header Today button margin (to fix position) */
 .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
-	/*margin: 0;
-	margin-top: 0.75rem;
-	flex-direction: column;*/
-	margin: 0;
-	/*border-top-right-radius: 0;*/
-	/*border-top-left-radius: 0;*/
+    /*margin: 0;
+    margin-top: 0.75rem;
+    flex-direction: column;*/
+    margin: 0;
+    /*border-top-right-radius: 0;*/
+    /*border-top-left-radius: 0;*/
 }
 
 /* Header Prev button */

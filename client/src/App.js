@@ -1,5 +1,5 @@
-import Navigation from './components/navigation/navigation';
-import { createIndexedDBMultipleStores } from './utils/indexedDB';
+import Navigation from './components/navigation/navigation'
+import { createIndexedDBMultipleStores } from './utils/indexedDB'
 
 //const Navigation = lazy(() => import('./components/auth/navigation'));
 /*createIndexedDB('portfolio', 1, 'userEvents', 'id', true, [
@@ -16,7 +16,7 @@ const stores = [
       { key: 'title', unique: false },
       { key: 'start', unique: false },
       { key: 'end', unique: false },
-    ]
+    ],
   },
   {
     storeName: 'userTodos', keyPath: 'id', autoIncrement: true, indexes: [
@@ -25,17 +25,17 @@ const stores = [
       { key: 'completed', unique: false },
       { key: 'createdOn', unique: false },
       { key: 'doneOn', unique: false },
-    ]
+    ],
   },
-];
-createIndexedDBMultipleStores('portfolio', 1, stores);
+]
+createIndexedDBMultipleStores('portfolio', 1, stores)
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
+      <Navigation/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const colors2 = {
   blue: {
@@ -30,7 +30,7 @@ export const colors2 = {
     hex: '#E3FAA0',
     rgb: '227, 250, 160',
     rgba: '227, 250, 160, 98',
-  }
+  },
 }
 
 export const colors3 = {
@@ -54,7 +54,7 @@ export const colors3 = {
     light: '#A4E1AE',
     dark: '#48A857',
     darker: '#275C2F',
-    grey: '#435C47'
+    grey: '#435C47',
   },
 }
 
@@ -98,7 +98,7 @@ export const Container = styled.div`
     //padding: 2rem 12rem;
   }
 	
-`;
+`
 
 export const Button = styled.button`
   background-color: ${colors3.blue.primary};
@@ -118,16 +118,16 @@ export const Button = styled.button`
     transition: 0.35s;
     transform: scale(1.005);
   }
-`;
+`
 
 export const ModalButton = styled(Button)`
   margin-top: 2rem;
-`;
+`
 
 export const TextParagrah = styled.p`
   margin-top: 1rem;
   margin-bottom: 1rem;
-`;
+`
 
 export const FormInput = styled.input`
   outline: none;
@@ -135,7 +135,7 @@ export const FormInput = styled.input`
   border: none;
   border-radius: 4px;
   height: 40px;
-`;
+`
 
 export const FormTextarea = styled.textarea`
   outline: none;
@@ -143,7 +143,7 @@ export const FormTextarea = styled.textarea`
   border: none;
   border-radius: 4px;
   //height: 38px;
-`;
+`
 
 export const FormSelect = styled.select`
   outline: none;
@@ -151,7 +151,7 @@ export const FormSelect = styled.select`
   border: none;
   border-radius: 4px;
   height: 40px;
-`;
+`
 
 export const Wrapper = styled.div`
   margin-bottom: 2rem;
@@ -161,4 +161,4 @@ export const Wrapper = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-`;
+`

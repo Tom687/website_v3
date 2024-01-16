@@ -121,6 +121,6 @@ export const getGoogleUser = async ({ id_token, access_token }) => {
     // TODO : Gestion erreur ? catchAsync + AppError ?
   catch (err) {
     log.error(err, 'Error fetching Google User')
-    throw new Error(err.message);
+    throw new Error(err.message)
   }
-};
+}

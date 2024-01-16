@@ -33,27 +33,27 @@ export const getEvents = catchAsync(async (req, res, next) => {
 
   // TODO : Optimiser queries avec nouvelles queries sans JOIN (check queries.sql) ?
   const eventsQuery = db.select(
-    'e.id',
-    'e.title',
-    'e.start_at AS start',
-    'e.end_at AS end',
-    'e.description',
-  )
-  .from('events AS e')
-  .innerJoin('users_events AS ue', 'ue.id_event', 'e.id')
-  .innerJoin('users AS u', 'ue.id_user', 'u.id')
-  .innerJoin('login AS l', 'l.id_user', 'u.id')
-  .whereIn('e.id', function () {
-    this.select('id_event').from('users_events')
-    .where({ id_user: userId })
-  })
-  .groupBy('e.id')
-  .orderBy('e.id', 'ASC')
+      'e.id',
+      'e.title',
+      'e.start_at AS start',
+      'e.end_at AS end',
+      'e.description',
+    )
+    .from('events AS e')
+    .innerJoin('users_events AS ue', 'ue.id_event', 'e.id')
+    .innerJoin('users AS u', 'ue.id_user', 'u.id')
+    .innerJoin('login AS l', 'l.id_user', 'u.id')
+    .whereIn('e.id', function () {
+      this.select('id_event').from('users_events')
+        .where({ id_user: userId })
+    })
+    .groupBy('e.id')
+    .orderBy('e.id', 'ASC')
 
   if (userRole !== 'user' && userRole !== 'guest') {
     eventsQuery.orWhereNotIn('e.id', function () {
       this.select('id_event').from('users_events')
-      .where({ id_user: userId })
+        .where({ id_user: userId })
     })
   }
 
@@ -109,8 +109,8 @@ export const updateEvent = catchAsync(async (req, res, next) => {
     // This query updates the event only if the user is linked to the event (in users_events table)
     await db('events AS e').update(req.body).whereIn('e.id', function () {
       this.select('id_event').from('users_events')
-      .where({ id_user: userId })
-      .andWhere({ id_event: id })
+        .where({ id_user: userId })
+        .andWhere({ id_event: id })
     }).returning(['id', 'title', 'description', 'start_at AS start', 'end_at AS end'])
 
     return res.status(200).json({

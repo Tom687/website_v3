@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import CheckIcon from './checkmark2.png';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import CheckIcon from './checkmark2.png'
+import styled from 'styled-components'
 
 const CustomCheckbox = ({ onClick, done }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
 
   function onChange() {
     if (!done) {
-      setIsChecked(false);
+      setIsChecked(false)
     }
     else if (done || isChecked) {
-      setIsChecked(false);
+      setIsChecked(false)
     }
     else {
-      setIsChecked(!isChecked);
+      setIsChecked(!isChecked)
     }
   }
 
@@ -31,8 +31,8 @@ const CustomCheckbox = ({ onClick, done }) => {
         onClick={() => onChange()}
       ></Checkmark>
     </Wrapper>
-  );
-};
+  )
+}
 
 /*CustomCheckbox.propTypes = {
  onClick: PropTypes.func.isRequired,
@@ -59,7 +59,7 @@ const Wrapper = styled.div`
   /* TODO NEW */
   display: flex;
   align-items: center;
-`;
+`
 
 const Checkbox = styled.input`
   border: 0;
@@ -72,7 +72,7 @@ const Checkbox = styled.input`
   position: absolute;
   white-space: nowrap;
   width: 1px;
-`;
+`
 
 const Checkmark = styled.span`
   display: inline-block;
@@ -102,6 +102,6 @@ const Checkmark = styled.span`
       height: 2.25rem;
     }
   }
-`;
+`
 
-export default CustomCheckbox;
+export default CustomCheckbox

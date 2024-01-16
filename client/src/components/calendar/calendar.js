@@ -1,69 +1,69 @@
-import React, { lazy, useContext, useEffect, useRef, useState } from 'react';
-import frLocal from '@fullcalendar/core/locales/fr';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-import interactionPlugin from '@fullcalendar/interaction';
-import axios from 'axios';
-import moment from 'moment';
-import { AuthContext } from '../../contexts/auth';
-import SelectModal from '../modal/selectModal';
-import ClickModal from '../modal/clickModal';
-import Modal from '../modal/modal';
-import { useSnackbar } from 'notistack';
-import { Container } from '../styles/generalStyles';
+import React, { lazy, useContext, useEffect, useRef, useState } from 'react'
+import frLocal from '@fullcalendar/core/locales/fr'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
+import interactionPlugin from '@fullcalendar/interaction'
+import axios from 'axios'
+import moment from 'moment'
+import { AuthContext } from '../../contexts/auth'
+import SelectModal from '../modal/selectModal'
+import ClickModal from '../modal/clickModal'
+import Modal from '../modal/modal'
+import { useSnackbar } from 'notistack'
+import { Container } from '../styles/generalStyles'
 import {
   addDataToIDBStore, countIDBData,
   getAllIDBStoreData,
   removeObjectFromStore,
   updateIDBData,
-} from '../../utils/indexedDB';
-import useDetectDevice from '../../hooks/useDetectDevice';
-import useWindowSize from '../../hooks/useWindowSize';
+} from '../../utils/indexedDB'
+import useDetectDevice from '../../hooks/useDetectDevice'
+import useWindowSize from '../../hooks/useWindowSize'
 
-import './calendar.css';
+import './calendar.css'
 
-const CalendarDoc = lazy(() => import('./calendarDoc'));
+const CalendarDoc = lazy(() => import('./calendarDoc'))
 
 export default function Calendar() {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext)
 
-  const windowSize = useWindowSize();
+  const windowSize = useWindowSize()
 
-  const [ev, setEv] = useState([]);
-  const [isSelectModalOpen, setSelectModalIsOpen] = useState(false);
-  const [isClickModalOpen, setClickModalIsOpen] = useState(false);
-  const [eventDates, setEventDates] = useState({});
-  const [selectEventInfo, setSelectedEventInfo] = useState({});
+  const [ev, setEv] = useState([])
+  const [isSelectModalOpen, setSelectModalIsOpen] = useState(false)
+  const [isClickModalOpen, setClickModalIsOpen] = useState(false)
+  const [eventDates, setEventDates] = useState({})
+  const [selectEventInfo, setSelectedEventInfo] = useState({})
 
   const updateEventState = (event, params) => ev.map(ev => {
     if (Number(ev.id) === Number(event.id)) {
       return {
         ...ev,
         ...params,
-      };
+      }
     }
     else {
-      return ev;
+      return ev
     }
-  });
+  })
 
   //  TODO => Plus besoin de switch entre user mais on doit pouvoir switch entre "shared" et "perso"
   useEffect(() => {
     async function getEvents() {
       if (!isLoggedIn) {
-        return JSON.parse(localStorage.getItem('userEvents'));
+        return JSON.parse(localStorage.getItem('userEvents'))
       }
       else {
-        const res = await axios.get('/me/events');
+        const res = await axios.get('/me/events')
 
         if (res.status === 200 || res.data.status === 'success') {
           return {
             events: res.data.events,
-          };
+          }
         }
       }
     }
@@ -72,24 +72,24 @@ export default function Calendar() {
     if (user && isLoggedIn) {
       getEvents()
         .then(res => {
-          setEv(res.events/* || Array(res)*/);
-        });
+          setEv(res.events/* || Array(res)*/)
+        })
     }
-  }, [user, isLoggedIn]);
+  }, [user, isLoggedIn])
 
   // TODO : getCount() utile ? Enregistrer count initial dans un state et MAJ events que s'il change ?
   //    => Les MAJ risquent de ne pas fonctionner comme on garde le même count ?
   const getCount = async () => {
-    const count = await countIDBData('userEvents');
-    return count;
-  };
+    const count = await countIDBData('userEvents')
+    return count
+  }
   const getEv = async () => {
-    const events = await getAllIDBStoreData('userEvents');
-    return events;
-  };
+    const events = await getAllIDBStoreData('userEvents')
+    return events
+  }
   // TODO : Pas besoin du async ?
   useEffect(() => {
-    if ((!isSelectModalOpen || !isClickModalOpen) && !isLoggedIn) {
+    if (( !isSelectModalOpen || !isClickModalOpen ) && !isLoggedIn) {
       /*getCount()
         .then(count => {
           if (count > 0) {
@@ -101,8 +101,8 @@ export default function Calendar() {
         });*/
       getEv()
         .then(res => {
-          setEv(res);
-        });
+          setEv(res)
+        })
       /*const getEv = async () => {
        const events = await getAllIDBStoreData('userEvents');
        return events;
@@ -113,7 +113,7 @@ export default function Calendar() {
        });*/
 
     }
-  }, [isSelectModalOpen, isClickModalOpen, isLoggedIn]); // TODO : utilisation de isSelectModalOpen pas terrible ?
+  }, [isSelectModalOpen, isClickModalOpen, isLoggedIn]) // TODO : utilisation de isSelectModalOpen pas terrible ?
 
 
   // TODO : Revoir l'objet qu'on envoit lors du POST
@@ -122,58 +122,58 @@ export default function Calendar() {
       const eventObject = {
         ...eventInfo,
         ...eventDates,
-      };
+      }
 
       if (!isLoggedIn) {
-        await addDataToIDBStore('userEvents', eventObject);
-        setSelectModalIsOpen(false);
+        await addDataToIDBStore('userEvents', eventObject)
+        setSelectModalIsOpen(false)
       }
       else {
         // TODO : Comment ne pas insert event si aucun user lié ?
-        const res = await axios.post('/events', eventObject);
+        const res = await axios.post('/events', eventObject)
 
         if (res.status === 201 || res.status === 200 || res.data.status === 'success') {
           const linkUser = await axios.post(`/events/${res.data.event.id}/linkUser`, {
             userId: user.id,
-          });
+          })
 
           if (linkUser.status === 201 || linkUser.data.status === 'success') {
             // TODO : Revoir si utiliser autre syntaxe (plus longue...) ?
             // Display new event
-            setEv(prevState => [...prevState, res.data.event]);
-            setSelectModalIsOpen(false);
+            setEv(prevState => [...prevState, res.data.event])
+            setSelectModalIsOpen(false)
           }
 
-          enqueueSnackbar(res.data.message);
+          enqueueSnackbar(res.data.message)
         }
       }
     }
     catch (err) {
-      console.log(err);
+      console.log(err)
       /*enqueueSnackbar(err.response.data.message || 'Une erreur est survenue');*/
     }
   }
 
   async function onSingleUpdate(eventInfo) {
     try {
-      const { name, value } = eventInfo;
+      const { name, value } = eventInfo
 
       if (!isLoggedIn) {
-        updateIDBData('userEvents', Number(selectEventInfo.id), name, value);
+        updateIDBData('userEvents', Number(selectEventInfo.id), name, value)
         if (isMobile && touch) {
-          setTouch(!touch);
+          setTouch(!touch)
         }
         if (isClickModalOpen) {
-          setClickModalIsOpen(!isClickModalOpen);
+          setClickModalIsOpen(!isClickModalOpen)
         }
       }
       else {
         const res = await axios.put(`/events/${selectEventInfo.id}`, {
           [name]: value,
-        });
+        })
 
         if (res.status === 200 || res.data.status === 'success') {
-          enqueueSnackbar(res.data.message);
+          enqueueSnackbar(res.data.message)
           // Find the index of the event we want
           /*const index = ev.findIndex(event => event.id == selectEventInfo.id);
            // If no index, event doesn't exist so return
@@ -198,75 +198,75 @@ export default function Calendar() {
               return {
                 ...event,
                 [eventInfo.name]: eventInfo.value,
-              };
+              }
             }
             else {
-              return event;
+              return event
             }
-          });
+          })
 
-          setEv(updatedState);
+          setEv(updatedState)
         }
       }
     }
     catch (err) {
-      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue');
+      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue')
     }
   }
 
   async function onDelete() {
     try {
       if (!isLoggedIn) {
-        removeObjectFromStore('userEvents', Number(selectEventInfo.id));
-        setClickModalIsOpen(false);
+        removeObjectFromStore('userEvents', Number(selectEventInfo.id))
+        setClickModalIsOpen(false)
       }
       else {
-        const res = await axios.delete(`/events/${selectEventInfo.id}`);
+        const res = await axios.delete(`/events/${selectEventInfo.id}`)
 
         if (res.status === 200 || res.data.status === 'success') {
-          const updatedState = ev.filter(ev => Number(ev.id) !== Number(selectEventInfo.id));
+          const updatedState = ev.filter(ev => Number(ev.id) !== Number(selectEventInfo.id))
 
-          setEv(updatedState);
-          setClickModalIsOpen(false);
-          enqueueSnackbar(res.data.message);
+          setEv(updatedState)
+          setClickModalIsOpen(false)
+          enqueueSnackbar(res.data.message)
         }
       }
     }
     catch (err) {
-      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue');
+      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue')
     }
   }
 
 
   const handleSelect = (selectInfo) => {
-    const calendarApi = selectInfo.view.calendar;
+    const calendarApi = selectInfo.view.calendar
 
     if (!user) {
-      calendarApi.unselect();
-      return false;
+      calendarApi.unselect()
+      return false
     }
 
     if (moment(selectInfo.start).isBefore(moment())) {
-      enqueueSnackbar('Vous ne pouvez pas prendre de RDV dans le passé');
-      calendarApi.unselect();
-      return false;
+      enqueueSnackbar('Vous ne pouvez pas prendre de RDV dans le passé')
+      calendarApi.unselect()
+      return false
     }
 
-    setSelectModalIsOpen(true);
+    setSelectModalIsOpen(true)
 
     const eventInfo = {
       start: selectInfo.startStr,
       end: selectInfo.endStr,
-    };
+    }
 
-    setEventDates(eventInfo);
-  };
+    setEventDates(eventInfo)
+  }
 
   const handleEventClick = (clickInfo) => {
-    const event = clickInfo.event;
+    const event = clickInfo.event
 
-    const { id, title, startStr, endStr } = event;
-    const { description } = event.extendedProps;
+    const { id, title, startStr, endStr } = event
+    const { description } = event.extendedProps
 
     //const start = moment(startStr).format('YYYY-MM-DD HH:mm:ss');
     //const end = moment(endStr).format('YYYY-MM-DD HH:mm:ss');
@@ -276,127 +276,127 @@ export default function Calendar() {
         moment(startStr).subtract(1, 'h').format('YYYY-MM-DD HH:mm:ss') :
         moment(startStr).format('YYYY-MM-DD HH:mm:ss')
     const end =
-      isLoggedIn ? moment(endStr).subtract(1, 'h').format('YYYY-MM-DD HH:mm:ss') : moment(endStr).format('YYYY-MM-DD HH:mm:ss');
+      isLoggedIn ? moment(endStr).subtract(1, 'h').format('YYYY-MM-DD HH:mm:ss') : moment(endStr).format('YYYY-MM-DD HH:mm:ss')
 
     setSelectedEventInfo({
       id, title, start, end, description,
-    });
+    })
 
-    setClickModalIsOpen(true);
+    setClickModalIsOpen(true)
     // TODO : GET /events/:eventId pour fetch les infos de l'event
-  };
+  }
 
   // TODO : Drag & Drop ne fonctionne plus
   const handleEventDrop = async (eventDropInfo) => {
-    const event = eventDropInfo.event;
+    const event = eventDropInfo.event
 
-    const newStart = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-    const newEnd = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+    const newStart = moment(event.start).format('YYYY-MM-DD HH:mm:ss')
+    const newEnd = moment(event.end).format('YYYY-MM-DD HH:mm:ss')
 
     if (newStart < moment().format('YYYY-MM-DD HH')) {
-      enqueueSnackbar('Vous ne pouvez pas déplacer un évènement dans le passé');
-      eventDropInfo.revert();
-      return;
+      enqueueSnackbar('Vous ne pouvez pas déplacer un évènement dans le passé')
+      eventDropInfo.revert()
+      return
     }
 
     try {
       if (!isLoggedIn) {
-        updateIDBData('userEvents', Number(event.id), 'start', event.startStr);
-        updateIDBData('userEvents', Number(event.id), 'end', event.endStr);
+        updateIDBData('userEvents', Number(event.id), 'start', event.startStr)
+        updateIDBData('userEvents', Number(event.id), 'end', event.endStr)
 
         const updatedEventState = updateEventState(event, {
           start: event.startStr,
           end: event.endStr,
-        });
-        setEv(updatedEventState);
+        })
+        setEv(updatedEventState)
       }
       else {
         const res = await axios.put(`/events/${event.id}`, {
           start_at: event.startStr,
           end_at: event.endStr,
-        });
+        })
 
         if (res.status === 200 || res.data.status === 'success') {
           const updatedEventState = updateEventState(event, {
             start: event.startStr,
             end: event.endStr,
-          });
-          setEv(updatedEventState);
+          })
+          setEv(updatedEventState)
 
           // TODO : Update travelEvent lié si il y en a un
-          enqueueSnackbar(res.data.message);
+          enqueueSnackbar(res.data.message)
         }
       }
     }
     catch (err) {
       console.log(err)
-      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue');
+      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue')
     }
-  };
+  }
 
   const handleEventResize = async (eventResizeInfo) => {
-    const event = eventResizeInfo.event;
-    const newStart = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-    const newEnd = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+    const event = eventResizeInfo.event
+    const newStart = moment(event.start).format('YYYY-MM-DD HH:mm:ss')
+    const newEnd = moment(event.end).format('YYYY-MM-DD HH:mm:ss')
 
     if (newEnd < moment().format('YYYY-MM-DD HH')) {
-      enqueueSnackbar('Vous ne pouvez pas modifier la durée d\'un évènement dans le passé');
-      eventResizeInfo.revert();
-      return;
+      enqueueSnackbar('Vous ne pouvez pas modifier la durée d\'un évènement dans le passé')
+      eventResizeInfo.revert()
+      return
     }
 
-    const duration = moment.duration(moment(newEnd).diff(moment(newStart)));
-    const minutes = duration.asMinutes();
+    const duration = moment.duration(moment(newEnd).diff(moment(newStart)))
+    const minutes = duration.asMinutes()
 
     if (minutes < 60) {
-      enqueueSnackbar('La durée minimum d\'un évènement est d\'une heure');
-      eventResizeInfo.revert();
-      return false;
+      enqueueSnackbar('La durée minimum d\'un évènement est d\'une heure')
+      eventResizeInfo.revert()
+      return false
     }
     if (minutes > 240) {
-      enqueueSnackbar('La durée maximale d\'un évènement est de 4 heures');
-      return eventResizeInfo.revert();
+      enqueueSnackbar('La durée maximale d\'un évènement est de 4 heures')
+      return eventResizeInfo.revert()
     }
 
     try {
       if (!isLoggedIn) {
-        updateIDBData('userEvents', Number(event.id), 'start', event.startStr);
-        updateIDBData('userEvents', Number(event.id), 'end', event.endStr);
+        updateIDBData('userEvents', Number(event.id), 'start', event.startStr)
+        updateIDBData('userEvents', Number(event.id), 'end', event.endStr)
 
         const updatedEventState = updateEventState(event, {
           start: event.startStr,
           end: event.endStr,
-        });
-        setEv(updatedEventState);
+        })
+        setEv(updatedEventState)
       }
       else {
         const res = await axios.put(`/events/${event.id}`, {
           start_at: event.startStr,
           end_at: event.endStr,
-        });
+        })
 
         if (res.status === 200 || res.data.status === 'success') {
           const updatedEventState = updateEventState(event, {
             start: event.startStr,
             end: event.endStr,
-          });
-          setEv(updatedEventState);
-          enqueueSnackbar(res.data.message);
+          })
+          setEv(updatedEventState)
+          enqueueSnackbar(res.data.message)
         }
       }
     }
     catch (err) {
-      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue');
+      enqueueSnackbar(err.response.data.message || 'Une erreur est survenue')
     }
-  };
+  }
 
-  const { isMobile } = useDetectDevice();
-  const [touch, setTouch] = useState(false);
+  const { isMobile } = useDetectDevice()
+  const [touch, setTouch] = useState(false)
 
 
   const clickModalTitle = windowSize.width > 400 ?
-    `RDV du ${ moment(selectEventInfo.start).format('DD MMMM YYYY') } de ${ moment(selectEventInfo.start).format('HH:mm') } à ${moment(selectEventInfo.end).format('HH:mm')}` :
-    `RDV du ${ moment(selectEventInfo.start).format('DD MMMM YYYY') }`
+    `RDV du ${moment(selectEventInfo.start).format('DD MMMM YYYY')} de ${moment(selectEventInfo.start).format('HH:mm')} à ${moment(selectEventInfo.end).format('HH:mm')}` :
+    `RDV du ${moment(selectEventInfo.start).format('DD MMMM YYYY')}`
 
 
   return (
@@ -408,11 +408,11 @@ export default function Calendar() {
           isOpen={isSelectModalOpen}
           title="Ajouter un RDV"
         >
-          <SelectModal onInsert={onInsert} />
+          <SelectModal onInsert={onInsert}/>
         </Modal>
         <Modal
           handleClose={() => {
-            setClickModalIsOpen(false);
+            setClickModalIsOpen(false)
             //if (isMobile) setTouch(false);
           }}
           isOpen={isClickModalOpen}
@@ -445,7 +445,7 @@ export default function Calendar() {
           }}
           navLinks={true}
           nowIndicator={true}
-          locale={ frLocal }
+          locale={frLocal}
           timeZone="Europe/Paris"
           dayMaxEvents={true} // Number of events show on dayGrid before "+ X more events"
           slotEventOverlap={false}
@@ -465,7 +465,7 @@ export default function Calendar() {
 
           moreLinkContent={(args) => {
             //return windowSize.width <= 400 ? '+' + args.num : '+' + args.num + ' RDV';
-            return '+' + args.num;// + ' RDV'
+            return '+' + args.num// + ' RDV'
           }}
 
 
@@ -502,9 +502,9 @@ export default function Calendar() {
         />
       </Container>
 
-      <CalendarDoc />
+      <CalendarDoc/>
     </>
-  );
+  )
 }
 
 

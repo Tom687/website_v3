@@ -1,27 +1,27 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { editTodo, removeTodo, toggleTodo } from './TodoSlice';
-import CustomCheckbox from './CustomCheckbox';
-import axios from 'axios';
-import InlineEditInput from '../../../components/form/inlineEditInput';
-import styled from 'styled-components';
-import { AuthContext } from '../../../contexts/auth';
-import { removeObjectFromStore, updateIDBData } from '../../../utils/indexedDB';
-import moment from 'moment';
-import { Button, colors3 } from '../../../components/styles/generalStyles';
+import React, { useCallback, useContext, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { editTodo, removeTodo, toggleTodo } from './TodoSlice'
+import CustomCheckbox from './CustomCheckbox'
+import axios from 'axios'
+import InlineEditInput from '../../../components/form/inlineEditInput'
+import styled from 'styled-components'
+import { AuthContext } from '../../../contexts/auth'
+import { removeObjectFromStore, updateIDBData } from '../../../utils/indexedDB'
+import moment from 'moment'
+import { Button, colors3 } from '../../../components/styles/generalStyles'
 
 const TodoItem = ({ id, text, todo, onEditingTodo, isTouchDevice }) => {
-  const { isLoggedIn } = useContext(AuthContext);
-  const dispatch = useDispatch();
+  const { isLoggedIn } = useContext(AuthContext)
+  const dispatch = useDispatch()
 
-  const [isEditingActive, setIsEditingActive] = useState(false);
+  const [isEditingActive, setIsEditingActive] = useState(false)
 
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef(null)
 
   const handleTodoDblClick = useCallback(
     () => setIsEditingActive(true),
     [setIsEditingActive],
-  );
+  )
 
   // TODO : Pour si newTodoText.length == 0 le todo n'est pas supprimé ?
   // TODO : Y'a t'il un intérêt à utiliser useCallback ici ? Permet de ne pas avoir le warning "promise not used" mais
@@ -30,98 +30,98 @@ const TodoItem = ({ id, text, todo, onEditingTodo, isTouchDevice }) => {
     try {
       if (newTodoText.value.length === 0) {
         if (!isLoggedIn) {
-          removeObjectFromStore('userTodos', todo.id);
-          dispatch(removeTodo(todo.id));
+          removeObjectFromStore('userTodos', todo.id)
+          dispatch(removeTodo(todo.id))
         }
         else {
-          const res = await axios.delete('/todos/' + todo.id);
+          const res = await axios.delete('/todos/' + todo.id)
 
           if (res.status === 200 || res.data.status === 'success') {
-            dispatch(removeTodo(todo.id));
+            dispatch(removeTodo(todo.id))
           }
         }
       }
       else {
         if (!isLoggedIn) {
-          updateIDBData('userTodos', Number(todo.id), newTodoText.name, newTodoText.value.trim());
+          updateIDBData('userTodos', Number(todo.id), newTodoText.name, newTodoText.value.trim())
 
-          dispatch(editTodo({ id: todo.id, text: newTodoText.value.trim() }));
+          dispatch(editTodo({ id: todo.id, text: newTodoText.value.trim() }))
 
-          setIsEditingActive(false);
+          setIsEditingActive(false)
         }
         else {
           const res = await axios.put('/todos/' + todo.id, {
             [newTodoText.name]: newTodoText.value.trim(),
-          });
+          })
 
           if (res.status === 200 || res.data.status === 'success') {
-            dispatch(editTodo({ id: todo.id, text: newTodoText.value.trim() }));
+            dispatch(editTodo({ id: todo.id, text: newTodoText.value.trim() }))
 
-            setIsEditingActive(false);
+            setIsEditingActive(false)
           }
         }
       }
     }
     catch (err) {
-      console.error('Err edit todo', err);
+      console.error('Err edit todo', err)
     }
-  }, []);
+  }, [])
 
   const deleteTodo = async () => {
     try {
       if (!isLoggedIn) {
-        removeObjectFromStore('userTodos', todo.id);
-        dispatch(removeTodo(todo.id));
+        removeObjectFromStore('userTodos', todo.id)
+        dispatch(removeTodo(todo.id))
       }
       else {
-        const res = await axios.delete('/todos/' + todo.id);
+        const res = await axios.delete('/todos/' + todo.id)
 
         if (res.status === 200 || res.data.status === 'success') {
-          dispatch(removeTodo(todo.id));
+          dispatch(removeTodo(todo.id))
         }
       }
     }
     catch (err) {
-      console.error('Err deleteTodo', err);
+      console.error('Err deleteTodo', err)
     }
-  };
+  }
 
   const changeTodoStatus = async () => {
     try {
-      const status = !todo.completed;
-      let done_on;
+      const status = !todo.completed
+      let done_on
 
       // TODO : Fixer la date pour avoir la bonne du client (ici on a -1h avec new Date())
       if (status) {
-        done_on = moment().format('YYYY-MM-DD HH:mm:ss');
+        done_on = moment().format('YYYY-MM-DD HH:mm:ss')
       }
       else {
-        done_on = null;
+        done_on = null
       }
 
       if (!isLoggedIn) {
-        updateIDBData('userTodos', todo.id, 'completed', !todo.completed);
-        updateIDBData('userTodos', todo.id, 'doneOn', done_on);
+        updateIDBData('userTodos', todo.id, 'completed', !todo.completed)
+        updateIDBData('userTodos', todo.id, 'doneOn', done_on)
 
-        dispatch(toggleTodo(todo.id));
+        dispatch(toggleTodo(todo.id))
       }
       else {
         const res = await axios.put(`/todos/${todo.id}`, {
           completed: !todo.completed,
           done_on,
-        });
+        })
 
         if (res.status === 200 || res.data.status === 'success') {
-          dispatch(toggleTodo(todo.id));
+          dispatch(toggleTodo(todo.id))
         }
       }
     }
     catch (err) {
-      console.error('Err changeTodoStatus', err);
+      console.error('Err changeTodoStatus', err)
     }
-  };
+  }
 
-  const [inputValue, setInputValue] = useState(text);
+  const [inputValue, setInputValue] = useState(text)
 
   return (
     <ItemWrapper
@@ -150,8 +150,8 @@ const TodoItem = ({ id, text, todo, onEditingTodo, isTouchDevice }) => {
         &times;
       </DeleteButton>
     </ItemWrapper>
-  );
-};
+  )
+}
 
 /*TodoItem.propTypes = {
  todo: PropTypes.shape({
@@ -184,7 +184,7 @@ const DeleteButton = styled(Button)`
     //margin: 0;
     margin-right: 0.25rem;
   }
-`;
+`
 
 const ItemWrapper = styled.li`
   cursor: pointer;
@@ -259,8 +259,7 @@ const ItemWrapper = styled.li`
     display: inline-block;
     width: 90%;
   }
-`;
+`
 
 
-
-export default TodoItem;
+export default TodoItem

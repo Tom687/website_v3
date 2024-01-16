@@ -1,21 +1,21 @@
-import React, { lazy, useState } from 'react';
-import { setVisibilityFilter, VisibilityFilters } from './FilterSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUndoneTodosNumber } from '../TodoList/TodoSlice';
-import styled from 'styled-components';
+import React, { lazy, useState } from 'react'
+import { setVisibilityFilter, VisibilityFilters } from './FilterSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUndoneTodosNumber } from '../TodoList/TodoSlice'
+import styled from 'styled-components'
 
-const FilterLink = lazy(() => import('./FilterLink'));
+const FilterLink = lazy(() => import('./FilterLink'))
 
 const Footer = () => {
-  const [activeFilter, setActiveFilter] = useState(null);
-  const dispatch = useDispatch();
+  const [activeFilter, setActiveFilter] = useState(null)
+  const dispatch = useDispatch()
 
-  const undoneTodosNumber = useSelector(selectUndoneTodosNumber);
-  const todosLeftWord = undoneTodosNumber > 1 ? 'tâches restantes' : 'tâche restante';
+  const undoneTodosNumber = useSelector(selectUndoneTodosNumber)
+  const todosLeftWord = undoneTodosNumber > 1 ? 'tâches restantes' : 'tâche restante'
 
   function toggleFilter(filter) {
-    setActiveFilter(filter);
-    dispatch(setVisibilityFilter(filter));
+    setActiveFilter(filter)
+    dispatch(setVisibilityFilter(filter))
   }
 
   return (
@@ -48,8 +48,8 @@ const Footer = () => {
       </div>
 
     </FooterWrapper>
-  );
-};
+  )
+}
 
 const FooterWrapper = styled.footer`
   //text-align: center;
@@ -70,7 +70,7 @@ const FooterWrapper = styled.footer`
   @media (min-width: 600px) {
     justify-content: right;
   }
-`;
+`
 
 export const UndoneTodoNb = styled.div`
   display: flex;
@@ -82,6 +82,6 @@ export const UndoneTodoNb = styled.div`
     left: 1.25rem;
     padding-top: 3px;
   }
-`;
+`
 
-export default Footer;
+export default Footer

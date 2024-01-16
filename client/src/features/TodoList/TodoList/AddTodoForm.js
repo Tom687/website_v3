@@ -1,40 +1,40 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, selectAllTodos, selectUndoneTodosNumber, toggleAllTodos } from './TodoSlice';
-import styled from 'styled-components';
-import { AuthContext } from '../../../contexts/auth';
-import { addDataToIDBStore, updateIDBData } from '../../../utils/indexedDB';
-import moment from 'moment';
-import { colors3 } from '../../../components/styles/generalStyles';
+import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { addTodo, selectAllTodos, selectUndoneTodosNumber, toggleAllTodos } from './TodoSlice'
+import styled from 'styled-components'
+import { AuthContext } from '../../../contexts/auth'
+import { addDataToIDBStore, updateIDBData } from '../../../utils/indexedDB'
+import moment from 'moment'
+import { colors3 } from '../../../components/styles/generalStyles'
 
 const AddTodoForm = () => {
-  const { isLoggedIn } = useContext(AuthContext);
-  const [todo, setTodo] = useState('');
+  const { isLoggedIn } = useContext(AuthContext)
+  const [todo, setTodo] = useState('')
 
-  let allTodos = useSelector(selectAllTodos);
+  let allTodos = useSelector(selectAllTodos)
 
-  const undoneTodosNumber = useSelector(selectUndoneTodosNumber);
-  const [toggle, setToggle] = useState(false);
+  const undoneTodosNumber = useSelector(selectUndoneTodosNumber)
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     if (undoneTodosNumber === 0) {
-      setToggle(false);
+      setToggle(false)
     }
     else {
-      setToggle(true);
+      setToggle(true)
     }
-  }, [undoneTodosNumber]);
+  }, [undoneTodosNumber])
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
 
   // TODO : Ajouter createdOn et doneOn dans Redux
   async function submitTodo(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!todo.trim()) {
-      return;
+      return
     }
 
     try {
@@ -43,68 +43,68 @@ const AddTodoForm = () => {
           title: todo.trim(),
           completed: false,
           createdOn: moment().format('YYYY-MM-DD HH:mm:ss'),
-        });
+        })
 
-        dispatch(addTodo({ id: todoId, text: todo.trim() }));
+        dispatch(addTodo({ id: todoId, text: todo.trim() }))
 
-        setTodo('');
+        setTodo('')
       }
       else {
         const response = await axios.post('/todos', {
           title: todo.trim(),
-        });
+        })
 
         if (response.data.status === 'success' || response.status === 201) {
-          dispatch(addTodo({ text: todo.trim(), id: response.data.id }));
-          setTodo('');
+          dispatch(addTodo({ text: todo.trim(), id: response.data.id }))
+          setTodo('')
         }
       }
     }
     catch (err) {
       if (err.response) {
-        console.log('ERR.RES', err.response);
+        console.log('ERR.RES', err.response)
       }
-      console.error('ERROR SUBMIT TODO BACKEND : ', err);
+      console.error('ERROR SUBMIT TODO BACKEND : ', err)
     }
   }
 
   const toggleAll = async () => {
-    const isCompleted = toggle;
+    const isCompleted = toggle
 
     try {
       if (!isLoggedIn) {
         allTodos.forEach(todo => {
           if (isCompleted) {
-            updateIDBData('userTodos', todo.id, 'completed', true);
-            updateIDBData('userTodos', todo.id, 'doneOn', moment().format('YYYY-MM-DD HH:mm:ss'));
+            updateIDBData('userTodos', todo.id, 'completed', true)
+            updateIDBData('userTodos', todo.id, 'doneOn', moment().format('YYYY-MM-DD HH:mm:ss'))
           }
           else {
-            updateIDBData('userTodos', todo.id, 'completed', false);
-            updateIDBData('userTodos', todo.id, 'doneOn', null);
+            updateIDBData('userTodos', todo.id, 'completed', false)
+            updateIDBData('userTodos', todo.id, 'doneOn', null)
           }
-        });
+        })
 
-        dispatch(toggleAllTodos());
+        dispatch(toggleAllTodos())
       }
       else {
         const res = await axios.put('/todos', {
           completed: toggle,
           done_on: isCompleted ? moment().format('YYYY-MM-DD HH:mm:ss') : null,
-        });
+        })
 
         if (res.status === 200 || res.data.status === 'success') {
-          dispatch(toggleAllTodos());
+          dispatch(toggleAllTodos())
         }
       }
 
     }
     catch (err) {
       if (err.response) {
-        console.log('ERR.RES toggleAll() AddTodoForm', err.response);
+        console.log('ERR.RES toggleAll() AddTodoForm', err.response)
       }
-      console.error('ERROR toggleAll() AddTodoForm : ', err);
+      console.error('ERROR toggleAll() AddTodoForm : ', err)
     }
-  };
+  }
 
   return (
     <HeaderWrapper>
@@ -125,12 +125,12 @@ const AddTodoForm = () => {
         />
       </StyledForm>
     </HeaderWrapper>
-  );
-};
+  )
+}
 
 const HeaderWrapper = styled.div`
   position: relative;
-`;
+`
 
 const ToggleButton = styled.button`
   cursor: pointer;
@@ -157,7 +157,7 @@ const ToggleButton = styled.button`
 
   background-color: transparent;
   border: 1px solid transparent;
-`;
+`
 
 const StyledForm = styled.form`
   width: 100%;
@@ -179,6 +179,6 @@ const StyledForm = styled.form`
     outline: none;
     background-color: rgba(175, 91, 94, 0.3); /* rgba(175, 91, 94, 1) */
   }
-`;
+`
 
-export default AddTodoForm;
+export default AddTodoForm

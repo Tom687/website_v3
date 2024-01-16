@@ -88,8 +88,8 @@ const globalErrorHandler = (err, req, res, next) => {
       error = handleCastErrorPostgresDB(error)
     }
 
-    sendErrorProd(error, res);
+    sendErrorProd(error, res)
   }
-};
+}
 
-export default globalErrorHandler;
+export default globalErrorHandler

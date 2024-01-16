@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { buildResponse, builNoDatadResponse } from '../../helpers/docHelpers';
-import { lazy } from 'react';
-import { TextParagrah } from '../styles/generalStyles';
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { buildResponse, builNoDatadResponse } from '../../helpers/docHelpers'
+import { lazy } from 'react'
+import { TextParagrah } from '../styles/generalStyles'
 
-const DocLayout = lazy(() => import('../doc/docLayout'));
+const DocLayout = lazy(() => import('../doc/docLayout'))
 
 export default function TodoDoc() {
   const todoObj = ({ title, completed }) =>
@@ -15,17 +15,17 @@ export default function TodoDoc() {
 				completed: "${completed ? completed : 'false'}",
 				created_on: "timestamp",
 				done_one: "timestamp"
-			}`;
+			}`
 
   const todosArr =
-          `todo: [{
+    `todo: [{
 				id: "1",
 				userId: "1",
 				title: "Todo à faire super important",
 				completed: false,
 				created_on: "timestamp",
 				done_one: "timestamp"
-			}]`;
+			}]`
 
   const getAllTodosSampleReq = `
 		try {
@@ -35,7 +35,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const getOneTodoSampleReq = `
 		try {
@@ -45,7 +45,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const getUserTodosSampleReq = `
 		try {
@@ -55,7 +55,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const createTodoSampleReq = `
 		try {
@@ -67,7 +67,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const updateOneTodoSampleReq = `
 		try {
@@ -79,7 +79,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const toggleAllTodosSampleReq = `
 		try {
@@ -91,7 +91,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const deleteTodoSampleReq = `
 		try {
@@ -101,7 +101,7 @@ export default function TodoDoc() {
 		catch (err) {
 			console.log(err.response.data.message || err);
 		}
-	`;
+	`
 
   const endpoints = [
     {
@@ -222,7 +222,7 @@ export default function TodoDoc() {
       }),
       sampleRequest: deleteTodoSampleReq,
     },
-  ];
+  ]
 
   return (
     <DocLayout
@@ -290,5 +290,5 @@ export default function TodoDoc() {
         protection depuis <code>GET /todos?userId=1</code>.
       </TextParagrah>
     </DocLayout>
-  );
+  )
 }

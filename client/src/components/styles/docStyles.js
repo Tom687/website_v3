@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { Container } from './generalStyles';
+import styled from 'styled-components'
+import { Container } from './generalStyles'
 
 export const DescriptionParagraph = styled.p`
 	//padding: 0.75rem;
-`;
+`
 
 export const CardWrapper = styled(Container)`
   //padding: 2.5em;
@@ -42,7 +42,7 @@ export const CardWrapper = styled(Container)`
 	p {
 		margin-bottom: 1em;
 	}
-`;
+`
 
 export const CardItem = styled.div`
 	h4 {
@@ -62,4 +62,4 @@ export const CardItem = styled.div`
 		margin-bottom: 1.5em;
     margin-top: 1em;
 	}
-`;
+`

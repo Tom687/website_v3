@@ -1,74 +1,74 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/auth';
-import styled from 'styled-components';
-import Logo from '../../assets/logos/logo-noir-blanc.svg';
-import useToggle from '../../hooks/useToggle';
-import useWindowSize from '../../hooks/useWindowSize';
-import useDetectDevice from '../../hooks/useDetectDevice';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../contexts/auth'
+import styled from 'styled-components'
+import Logo from '../../assets/logos/logo-noir-blanc.svg'
+import useToggle from '../../hooks/useToggle'
+import useWindowSize from '../../hooks/useWindowSize'
+import useDetectDevice from '../../hooks/useDetectDevice'
 
 export default function Header() {
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext)
 
-  const { isMobile } = useDetectDevice();
+  const { isMobile } = useDetectDevice()
 
-  console.log('isMobile header', isMobile);
+  console.log('isMobile header', isMobile)
 
-  let navigate = useNavigate();
-  let location = useLocation();
+  let navigate = useNavigate()
+  let location = useLocation()
 
-  const windowSize = useWindowSize();
-  const { status: isMenuExpanded, toggleStatus: toggleMenu } = useToggle();
+  const windowSize = useWindowSize()
+  const { status: isMenuExpanded, toggleStatus: toggleMenu } = useToggle()
 
   useEffect(() => {
     if (!isLoggedIn && isMenuExpanded) {
-      toggleMenu();
+      toggleMenu()
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn])
 
   useEffect(() => {
     if (isMenuExpanded) {
-      toggleMenu();
+      toggleMenu()
     }
-  }, [location]);
+  }, [location])
 
 
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    let oldValue = 0;
-    let newValue = 0;
+    let oldValue = 0
+    let newValue = 0
 
     const handleScroll = () => {
-      newValue = window.scrollY;
+      newValue = window.scrollY
 
       //Subtract the two and conclude
       if (oldValue - newValue < 0) {
-        setVisible(false);
+        setVisible(false)
       }
       else if (oldValue - newValue > 0) {
-        setVisible(true);
+        setVisible(true)
       }
 
       // Update the old value
-      oldValue = newValue;
-    };
+      oldValue = newValue
+    }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
 
   return (
     <>
       {
-        (windowSize.width >= 800 /*&& !isMobile*/) &&
+        ( windowSize.width >= 800 /*&& !isMobile*/ ) &&
         <StyledHeader visible={visible}>
 
           <nav>
             <LogoImg>
-              <img src={Logo} alt="Logo site" width={80} />
+              <img src={Logo} alt="Logo site" width={80}/>
             </LogoImg>
             <ul>
               {
@@ -112,7 +112,7 @@ export default function Header() {
                   <li>
                     <LogoutButton
                       onClick={() => {
-                        logout(() => navigate('/'));
+                        logout(() => navigate('/'))
                       }}
                     >
                       Se déconnecter
@@ -125,18 +125,18 @@ export default function Header() {
         </StyledHeader>
       }
       {
-        (windowSize.width < 800 || isMobile) &&
+        ( windowSize.width < 800 || isMobile ) &&
         <MobileHeader expanded={isMenuExpanded}>
           <nav>
             <LogoImg>
-              <img src={Logo} alt="Logo site" width={80} />
+              <img src={Logo} alt="Logo site" width={80}/>
             </LogoImg>
             <ul>
               {
                 !isLoggedIn &&
                 <>
                   <HamburgerButton.Wrapper onClick={() => toggleMenu()}>
-                    <HamburgerButton.Lines />
+                    <HamburgerButton.Lines/>
                   </HamburgerButton.Wrapper>
                   {
                     isMenuExpanded &&
@@ -167,7 +167,7 @@ export default function Header() {
                 isLoggedIn &&
                 <>
                   <HamburgerButton.Wrapper onClick={() => toggleMenu()}>
-                    <HamburgerButton.Lines />
+                    <HamburgerButton.Lines/>
                   </HamburgerButton.Wrapper>
 
                   {
@@ -188,7 +188,7 @@ export default function Header() {
                       <li>
                         <LogoutButton
                           onClick={() => {
-                            logout(() => navigate('/'));
+                            logout(() => navigate('/'))
                           }}
                         >
                           Se déconnecter
@@ -205,7 +205,7 @@ export default function Header() {
       }
     </>
 
-  );
+  )
 }
 
 const HamburgerButton = {
@@ -265,14 +265,14 @@ const HamburgerButton = {
       top: 0.8rem;
     }
   `,
-};
+}
 
 const MobileNav = styled.div`
     /*transition: 1s;
 	li {
     opacity: ${props => props.expanded ? 1 : 0};
 	}*/
-`;
+`
 
 const LogoImg = styled.div`
   display: flex;
@@ -281,7 +281,7 @@ const LogoImg = styled.div`
   img {
     padding: 0.4rem;
   }
-`;
+`
 
 const MobileHeader = styled.header`
   nav {
@@ -367,7 +367,7 @@ const MobileHeader = styled.header`
     font-size: 1.25em;
     display: none;
   }
-`;
+`
 
 const StyledHeader = styled.header`
   //display: flex;
@@ -454,7 +454,7 @@ const StyledHeader = styled.header`
     position: unset;
     font-size: 1.25em;
   }
-`;
+`
 
 const StyledNav = styled.nav`
   /*position: fixed;
@@ -515,7 +515,7 @@ const StyledNav = styled.nav`
   @media (min-width: 1024px) {
     position: unset;
   }
-`;
+`
 
 const LogoutButton = styled.button`
   background-color: #4CAF50;
@@ -529,4 +529,4 @@ const LogoutButton = styled.button`
   font-size: 1rem;
   white-space: nowrap;
   margin: 0 !important;
-`;
+`

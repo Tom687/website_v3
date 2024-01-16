@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Button, colors3 } from '../../../components/styles/generalStyles';
+import React from 'react'
+import styled from 'styled-components'
+import { Button, colors3 } from '../../../components/styles/generalStyles'
 
 const FilterLink = ({ filter, onClick, activeFilter, children }) => {
 
@@ -11,8 +11,8 @@ const FilterLink = ({ filter, onClick, activeFilter, children }) => {
     >
       {children}
     </StyledButton>
-  );
-};
+  )
+}
 
 /*FilterLink.propTypes = {
  filter: PropTypes.oneOf([
@@ -52,6 +52,6 @@ const StyledButton = styled(Button)`
       background-color: ${colors3.blue.darker}
     }
   }
-`;
+`
 
-export default FilterLink;
+export default FilterLink

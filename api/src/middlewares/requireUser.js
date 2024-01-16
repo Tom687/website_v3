@@ -11,4 +11,4 @@ const requireUser = (req, res, next) => {
   return next()
 }
 
-export default requireUser;
+export default requireUser

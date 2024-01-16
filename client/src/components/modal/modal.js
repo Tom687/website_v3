@@ -1,67 +1,67 @@
-import React, {useEffect, useRef } from 'react';
-import { CSSTransition } from "react-transition-group";
-import ReactPortal from '../reactPortal';
-import './modalStyles.css';
-import styled from 'styled-components';
-import { colors3 } from '../styles/generalStyles';
+import React, { useEffect, useRef } from 'react'
+import { CSSTransition } from 'react-transition-group'
+import ReactPortal from '../reactPortal'
+import './modalStyles.css'
+import styled from 'styled-components'
+import { colors3 } from '../styles/generalStyles'
 
 //https://github.com/KRRISH96/react-portal-overlay/blob/main/src/components/Modal/Modal.js
 
 export default function Modal({ isOpen, handleClose, title, children }) {
-	const nodeRef = useRef(null);
-	
-	useEffect(() => {
-		const closeOnEscape = e => (e.key === 'Escape')  ? handleClose() : null;
-		
-		document.addEventListener('keydown', closeOnEscape);
-		
-		return () => {
-			document.body.removeEventListener('keydown', closeOnEscape);
-		}
-	}, [handleClose]);
-	
-	return (
-		<ReactPortal wrapperId="modal">
-			<CSSTransition
-				in={isOpen}
-				timeout={{ entry: 0, exit: 300 }}
-				unmountOnExit
-				classNames="modal"
-				nodeRef={nodeRef}
-			>
-					<div className="modal" ref={nodeRef}>
-						<ModalWrapper
-							//ref={nodeRef} // TODO : Useful ?
-						>
-							<ModalHeader className="modal-drag-handle">
-								<h1>
-									{ title && title }
-								</h1>
-								<nav>
-									<button
-										onClick={handleClose}
-									>
-										&times;
-									</button>
-								</nav>
-							</ModalHeader>
-							<ModalBody>
-								<ModalContent>
-									{ children }
-								</ModalContent>
-							</ModalBody>
-						</ModalWrapper>
-					</div>
-			</CSSTransition>
-		</ReactPortal>
-	);
+  const nodeRef = useRef(null)
+
+  useEffect(() => {
+    const closeOnEscape = e => ( e.key === 'Escape' ) ? handleClose() : null
+
+    document.addEventListener('keydown', closeOnEscape)
+
+    return () => {
+      document.body.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [handleClose])
+
+  return (
+    <ReactPortal wrapperId="modal">
+      <CSSTransition
+        in={isOpen}
+        timeout={{ entry: 0, exit: 300 }}
+        unmountOnExit
+        classNames="modal"
+        nodeRef={nodeRef}
+      >
+        <div className="modal" ref={nodeRef}>
+          <ModalWrapper
+            //ref={nodeRef} // TODO : Useful ?
+          >
+            <ModalHeader className="modal-drag-handle">
+              <h1>
+                {title && title}
+              </h1>
+              <nav>
+                <button
+                  onClick={handleClose}
+                >
+                  &times;
+                </button>
+              </nav>
+            </ModalHeader>
+            <ModalBody>
+              <ModalContent>
+                {children}
+              </ModalContent>
+            </ModalBody>
+          </ModalWrapper>
+        </div>
+      </CSSTransition>
+    </ReactPortal>
+  )
 }
 
 const ModalWrapper = styled.div`
   display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-`;
+`
 
 const ModalBody = styled.div`
   display: flex;
@@ -78,13 +78,13 @@ const ModalBody = styled.div`
   font-size: 2rem;
 	width: 85%;
 	margin: 0 auto;
-`;
+`
 
 const ModalContent = styled.div`
 	padding: 2rem;
 	width: 100%;
 	word-break: break-word;
-`;
+`
 
 const ModalHeader = styled.header`
   position: relative;
@@ -156,4 +156,4 @@ const ModalHeader = styled.header`
     }
 
   }
-`;
+`
