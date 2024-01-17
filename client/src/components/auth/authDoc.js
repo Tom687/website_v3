@@ -4,7 +4,6 @@ import { TextParagrah } from '../styles/generalStyles'
 
 const DocLayout = lazy(() => import('../doc/docLayout'))
 
-
 export default function AuthDoc() {
   const getMySessionsSampleRequest = `
 		try {
