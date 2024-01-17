@@ -3,7 +3,7 @@ export default function getGoogleOAuthUrl() {
 
   const baseURL =
     process.env.NODE_ENV === 'production'
-      ? '/api/sessions/oauth/google'
+      ? 'https://tom-pomarede.com/api/sessions/oauth/google'
       : 'http://localhost:1337/api/sessions/oauth/google'
 
   const options = {
