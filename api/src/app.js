@@ -16,6 +16,8 @@ dotenv.config({ path: './config.env' })
 
 const app = express()
 
+const NODE_ENV = 'production'
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
