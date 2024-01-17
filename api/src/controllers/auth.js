@@ -36,8 +36,8 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
 
   // TODO : Voir si route est bonne (/api/auth ?)
   // PROD :
-  //    const resetUrl = `${req.hostname}/resetPassword/${resetToken}`;
-  const resetUrl = `${req.get('origin')}/resetPassword/${resetToken}`
+     const resetUrl = `${req.hostname}/resetPassword/${resetToken}`;
+  //const resetUrl = `${req.get('origin')}/resetPassword/${resetToken}`
   //const resetUrl = `${config.get('apiUrl')}/api/auth/resetPassword/${resetToken}`;
 
   try {
